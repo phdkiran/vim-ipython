@@ -95,7 +95,7 @@ def new_ipy(s=''):
     """
     # Ipython 4 
     # from IPython.kernel import KernelManager
-    from jupyter_client import manager as KernelManager
+    from jupyter_client.manager import KernelManager
     km = KernelManager()
     km.start_kernel()
     return km_from_string(km.connection_file)
@@ -113,7 +113,8 @@ def km_from_string(s=''):
     # from IPython.config.loader import KeyValueConfigLoader
     from traitlets.config.loader import KeyValueConfigLoader
     try:
-        from jupyter_client import find_connection_file, manager as KernelManager
+        from jupyter_client import find_connection_file
+        from jupyter_client.manager import KernelManager
         # Ipython 4 
         # from IPython.kernel import (
         #     KernelManager,
