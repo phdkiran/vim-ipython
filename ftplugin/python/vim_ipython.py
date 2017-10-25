@@ -133,6 +133,7 @@ def km_from_string(s=''):
     global km, kc, send
 
     s = s.replace('--existing', '')
+    # print(KernelManager.class_trait_names())
     if 'connection_file' in KernelManager.class_trait_names():
         # 0.12 uses files instead of a collection of ports
         # include default IPython search path

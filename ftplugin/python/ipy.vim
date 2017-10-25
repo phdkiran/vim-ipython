@@ -19,14 +19,14 @@
 " written by Paul Ivanov (http://pirsquared.org)
 "
 if !has('python3')
-    " exit if python is not available.
-    " XXX: raise an error message here
-    finish
+  " exit if python is not available.
+  " XXX: raise an error message here
+  finish
 endif
 
 " Allow custom mappings.
 if !exists('g:ipy_perform_mappings')
-    let g:ipy_perform_mappings = 1
+  let g:ipy_perform_mappings = 1
 endif
 
 " Register IPython completefunc
@@ -38,7 +38,7 @@ endif
 " correspond to the 'global' behavior, or with ':setl ...' to get the 'local'
 " behavior
 if !exists('g:ipy_completefunc')
-    let g:ipy_completefunc = 'global'
+  let g:ipy_completefunc = 'global'
 endif
 
 python3 << EOF
@@ -51,15 +51,15 @@ from vim_ipython import *
 EOF
 
 fun! <SID>toggle_send_on_save()
-    if exists("s:ssos") && s:ssos == 0
-        let s:ssos = 1
-        au BufWritePost *.py :py run_this_file()
-        echo "Autosend On"
-    else
-        let s:ssos = 0
-        au! BufWritePost *.py
-        echo "Autosend Off"
-    endif
+  if exists("s:ssos") && s:ssos == 0
+    let s:ssos = 1
+    au BufWritePost *.py :py run_this_file()
+    echo "Autosend On"
+  else
+    let s:ssos = 0
+    au! BufWritePost *.py
+    echo "Autosend Off"
+  endif
 endfun
 
 " Update the vim-ipython shell when the cursor is not moving.
@@ -110,38 +110,38 @@ noremap  <Plug>(IPython-RunLineAsTopLevel)  :python3 dedent_run_this_line()<CR>
 xnoremap <Plug>(IPython-RunLinesAsTopLevel) :python3 dedent_run_these_lines()<CR>
 
 if g:ipy_perform_mappings != 0
-    map   <silent> <F5>           <Plug>(IPython-RunFile)
-    map   <silent> <S-F5>         <Plug>(IPython-RunLine)
-    map   <silent> <F9>           <Plug>(IPython-RunLines)
-    map   <silent> <LocalLeader>d <Plug>(IPython-OpenPyDoc)
-    map   <silent> <LocalLeader>s <Plug>(IPython-UpdateShell)
-    map   <silent> <S-F9>         <Plug>(IPython-ToggleReselect)
-    "map   <silent> <C-F6>         <Plug>(IPython-StartDebugging)
-    "map   <silent> <F6>           <Plug>(IPython-BreakpointSet)
-    "map   <silent> <S-F6>         <Plug>(IPython-BreakpointClear)
-    "map   <silent> <F7>           <Plug>(IPython-DebugThisFile)
-    "map   <silent> <S-F7>         <Plug>(IPython-BreakpointClearAll)
-    imap           <C-F5>         <C-o><Plug>(IPython-RunFile)
-    imap           <S-F5>         <C-o><Plug>(IPython-RunLines)
-    imap  <silent> <F5>           <C-o><Plug>(IPython-RunFile)
-    map            <C-F5>         <Plug>(IPython-ToggleSendOnSave)
-    "" Example of how to quickly clear the current plot with a keystroke
-    "map   <silent> <F12>          <Plug>(IPython-PlotClearCurrent)
-    "" Example of how to quickly close all figures with a keystroke
-    "map   <silent> <F11>          <Plug>(IPython-PlotCloseAll)
+  map   <silent> <F5>           <Plug>(IPython-RunFile)
+  map   <silent> <S-F5>         <Plug>(IPython-RunLine)
+  map   <silent> <F9>           <Plug>(IPython-RunLines)
+  map   <silent> <LocalLeader>d <Plug>(IPython-OpenPyDoc)
+  map   <silent> <LocalLeader>s <Plug>(IPython-UpdateShell)
+  map   <silent> <S-F9>         <Plug>(IPython-ToggleReselect)
+  "map   <silent> <C-F6>         <Plug>(IPython-StartDebugging)
+  "map   <silent> <F6>           <Plug>(IPython-BreakpointSet)
+  "map   <silent> <S-F6>         <Plug>(IPython-BreakpointClear)
+  "map   <silent> <F7>           <Plug>(IPython-DebugThisFile)
+  "map   <silent> <S-F7>         <Plug>(IPython-BreakpointClearAll)
+  imap           <C-F5>         <C-o><Plug>(IPython-RunFile)
+  imap           <S-F5>         <C-o><Plug>(IPython-RunLines)
+  imap  <silent> <F5>           <C-o><Plug>(IPython-RunFile)
+  map            <C-F5>         <Plug>(IPython-ToggleSendOnSave)
+  "" Example of how to quickly clear the current plot with a keystroke
+  "map   <silent> <F12>          <Plug>(IPython-PlotClearCurrent)
+  "" Example of how to quickly close all figures with a keystroke
+  "map   <silent> <F11>          <Plug>(IPython-PlotCloseAll)
 
-    "pi custom
-    map   <silent> <C-Return>     <Plug>(IPython-RunFile)
-    map   <silent> <C-s>          <Plug>(IPython-RunLine)
-    imap  <silent> <C-s>          <C-o><Plug>(IPython-RunLine)
-    map   <silent> <M-s>          <Plug>(IPython-RunLineAsTopLevel)
-    xmap  <silent> <C-S>          <Plug>(IPython-RunLines)
-    xmap  <silent> <M-s>          <Plug>(IPython-RunLinesAsTopLevel)
+  "pi custom
+  map   <silent> <C-Return>     <Plug>(IPython-RunFile)
+  map   <silent> <C-s>          <Plug>(IPython-RunLine)
+  imap  <silent> <C-s>          <C-o><Plug>(IPython-RunLine)
+  map   <silent> <M-s>          <Plug>(IPython-RunLineAsTopLevel)
+  xmap  <silent> <C-S>          <Plug>(IPython-RunLines)
+  xmap  <silent> <M-s>          <Plug>(IPython-RunLinesAsTopLevel)
 
-    noremap   <silent> <M-c>      I#<ESC>
-    xnoremap  <silent> <M-c>      I#<ESC>
-    noremap   <silent> <M-C>      :s/^\([ \t]*\)#/\1/<CR>
-    xnoremap  <silent> <M-C>      :s/^\([ \t]*\)#/\1/<CR>
+  noremap   <silent> <M-c>      I#<ESC>
+  xnoremap  <silent> <M-c>      I#<ESC>
+  noremap   <silent> <M-C>      :s/^\([ \t]*\)#/\1/<CR>
+  xnoremap  <silent> <M-C>      :s/^\([ \t]*\)#/\1/<CR>
 endif
 
 command! -nargs=* IPython :py3 km_from_string("<args>")
@@ -152,58 +152,58 @@ command! -nargs=* IPythonInterrupt :py3 interrupt_kernel_hack("<args>")
 command! -nargs=0 IPythonTerminate :py3 terminate_kernel_hack()
 
 function! IPythonBalloonExpr()
-python3 << endpython
-word = vim.eval('v:beval_text')
-reply = get_doc(word)
-vim.command("let l:doc = %s"% reply)
+  python3 << endpython
+  word = vim.eval('v:beval_text')
+  reply = get_doc(word)
+  vim.command("let l:doc = %s"% reply)
 endpython
 return l:doc
 endfunction
 
 fun! CompleteIPython(findstart, base)
-      if a:findstart
-        " locate the start of the word
-        let line = getline('.')
-        let start = col('.') - 1
-        while start > 0 && line[start-1] =~ '\k\|\.' "keyword
-          let start -= 1
-        endwhile
-        echo start
-        python3 << endpython
-current_line = vim.current.line
+  if a:findstart
+    " locate the start of the word
+    let line = getline('.')
+    let start = col('.') - 1
+    while start > 0 && line[start-1] =~ '\k\|\.' "keyword
+      let start -= 1
+    endwhile
+    echo start
+    python3 << endpython
+    current_line = vim.current.line
 endpython
-        return start
-      else
-        " find months matching with "a:base"
-        let res = []
-        python3 << endpython
-base = vim.eval("a:base")
-findstart = vim.eval("a:findstart")
-matches = ipy_complete(base, current_line, vim.eval("col('.')"))
-# we need to be careful with unicode, because we can have unicode
-# completions for filenames (for the %run magic, for example). So the next
-# line will fail on those:
-#completions= [str(u) for u in matches]
-# because str() won't work for non-ascii characters
-# and we also have problems with unicode in vim, hence the following:
-#completions = [s.encode(vim_encoding) for s in matches]
-completions = [str(s) for s in matches]
-## Additionally, we have no good way of communicating lists to vim, so we have
-## to turn in into one long string, which can be problematic if e.g. the
-## completions contain quotes. The next line will not work if some filenames
-## contain quotes - but if that's the case, the user's just asking for
-## it, right?
-#completions = '["'+ '", "'.join(completions)+'"]'
-#vim.command("let completions = %s" % completions)
-## An alternative for the above, which will insert matches one at a time, so
-## if there's a problem with turning a match into a string, it'll just not
-## include the problematic match, instead of not including anything. There's a
-## bit more indirection here, but I think it's worth it
-for c in completions:
+  return start
+else
+  " find months matching with "a:base"
+  let res = []
+  python3 << endpython
+    base = vim.eval("a:base")
+    findstart = vim.eval("a:findstart")
+    matches = ipy_complete(base, current_line, vim.eval("col('.')"))
+    # we need to be careful with unicode, because we can have unicode
+    # completions for filenames (for the %run magic, for example). So the next
+    # line will fail on those:
+    #completions= [str(u) for u in matches]
+    # because str() won't work for non-ascii characters
+    # and we also have problems with unicode in vim, hence the following:
+    #completions = [s.encode(vim_encoding) for s in matches]
+    completions = [str(s) for s in matches]
+    ## Additionally, we have no good way of communicating lists to vim, so we have
+    ## to turn in into one long string, which can be problematic if e.g. the
+    ## completions contain quotes. The next line will not work if some filenames
+    ## contain quotes - but if that's the case, the user's just asking for
+    ## it, right?
+    #completions = '["'+ '", "'.join(completions)+'"]'
+    #vim.command("let completions = %s" % completions)
+    ## An alternative for the above, which will insert matches one at a time, so
+    ## if there's a problem with turning a match into a string, it'll just not
+    ## include the problematic match, instead of not including anything. There's a
+    ## bit more indirection here, but I think it's worth it
+    for c in completions:
     vim.command('call add(res,"'+c+'")')
 endpython
-        "call extend(res,completions) 
-        return res
-      endif
+  "call extend(res,completions)
+  return res
+endif
     endfun
 
