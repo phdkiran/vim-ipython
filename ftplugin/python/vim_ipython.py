@@ -329,7 +329,7 @@ def ipy_complete(base, current_line, pos):
         # we need to be careful with unicode, because we can have unicode
         # completions for filenames (for the %run magic, for example). So the next
         # line will fail on those:
-        #completions= [str(u) for u in matches]
+        #completions = [str(u) for u in matches]
         # because str() won't work for non-ascii characters
         # and we also have problems with unicode in vim, hence the following:
         return matches
@@ -450,8 +450,8 @@ def update_subchannel_msgs(debug=False, force=False):
         if s.find('\n') == -1:
             # somewhat ugly unicode workaround from
             # http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
-            if isinstance(s,unicode):
-                s=s.encode(vim_encoding)
+#            if isinstance(s,unicode):
+#                s=s.encode(vim_encoding)
             b.append(s)
         else:
             try:
